@@ -1,4 +1,4 @@
 <?php
-$page = "users";
+$page = "campaigns";
 include 'dashboard.php';
 ?>

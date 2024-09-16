@@ -2,9 +2,9 @@
 ob_start();
 session_start();
 
-include('Authentication/Authentication.php');
+include('AdminClass/Authentication.php');
 
-$app = new Authentication;
+$authentication = new Authentication;
  
 
 $admin = $_SESSION['id'];
@@ -13,11 +13,11 @@ if($admin == null){
 }
 
 if(isset($_GET['status'])){ 
-    $app->logout();
+    $authentication->logout($user_type = 1);
 }
 ?>
 
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -53,7 +53,7 @@ if(isset($_GET['status'])){
                 <div class="top-bar-brand">
                     <button class="hamburger hamburger-squeeze mr-2" type="button" data-toggle="aside-menu" aria-label="toggle aside menu">
                         <span class="hamburger-box"><span class="hamburger-inner"></span></span></button>
-                        <a href="index.html">
+                        <a href="dashboard.php">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="28" viewbox="0 0 351 100">
                                 <defs>
                                     <path id="a"
@@ -319,9 +319,8 @@ if(isset($_GET['status'])){
                             </li>
                         </ul>
                         <div class="dropdown d-none d-md-flex">
-                            <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <span class="user-avatar user-avatar-md"></span> 
+                            <button class="btn-account" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="user-avatar user-avatar-md"><img src="https://crm.poshorabd.net/public/uploads/user/2024091216113541871.png" alt=""></span>
                                 <span class="account-summary pr-lg-4 d-none d-lg-block">
                                     <span class="account-name"> 
                                         <?php 
@@ -329,7 +328,9 @@ if(isset($_GET['status'])){
                                             echo $_SESSION['name'];
                                         }
                                         ?>
-                                        </span></span></button> 
+                                    </span>
+                                </span>
+                            </button> 
                             <div class="dropdown-menu">
                                 <div class="dropdown-arrow d-lg-none" x-arrow=""></div>
                                 <div class="dropdown-arrow ml-3 d-none d-lg-block"></div>
@@ -339,13 +340,9 @@ if(isset($_GET['status'])){
                                         echo $_SESSION['name'];
                                     }
                                     ?>
-                                </h6><a
-                                    class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item"
-                                    href="?status=logout&logout=true"><span class="dropdown-icon oi oi-account-logout"></span>
-                                    Logout</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a
-                                    class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item"
-                                    href="#">Keyboard Shortcuts</a>
+                                </h6>
+                                <a class="dropdown-item" href="user-profile.html"><span class="dropdown-icon oi oi-person"></span> Profile</a> 
+                                <a class="dropdown-item" href="?status=logout&logout=true"><span class="fa fa-sing-out"></span>Logout</a> 
                             </div>
                         </div>
                     </div>
@@ -356,7 +353,7 @@ if(isset($_GET['status'])){
             <div class="aside-content">
                 <header class="aside-header d-block d-md-none">
                     <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span
-                            class="user-avatar user-avatar-lg"><img src="assets/images/avatars/profile.jpg"
+                            class="user-avatar user-avatar-lg"><img src="https://crm.poshorabd.net/public/uploads/user/2024091216113541871.png"
                                 alt=""></span> <span class="account-icon"><span
                                 class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span
                                 class="account-name">Beni Arisandi</span> <span class="account-description">Marketing
@@ -365,7 +362,7 @@ if(isset($_GET['status'])){
                         <div class="pb-3">
                             <a class="dropdown-item" href="user-profile.html"><span
                                     class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item"
-                                href="auth-signin-v1.html"><span class="dropdown-icon oi oi-account-logout"></span>
+                                href="?status=logout&logout=true"><span class="dropdown-icon oi oi-account-logout"></span>
                                 Logout</a>
                             <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a
                                 class="dropdown-item" href="#">Ask Forum</a> <a class="dropdown-item" href="#">Keyboard
@@ -391,8 +388,14 @@ if(isset($_GET['status'])){
                     <div class="page-inner">
                         <?php
                         if(isset($page)){
-                            if($page = 'product'){
+                            if($page == 'users'){
                                 include('pages/users.php'); 
+                            }
+                            elseif($page == 'campaigns'){
+                                include('pages/campaigns.php'); 
+                            }
+                            elseif($page == 'add_campaign'){
+                                include('pages/add_campaign.php'); 
                             }
                         } 
                         else{

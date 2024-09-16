@@ -9,9 +9,9 @@
             <span class="menu-text">Users</span>
             <span class="badge badge-warning">New</span>
         </a>  
-        <a href="#" class="menu-link">
+        <a href="campaigns.php" class="menu-link">
             <i class="fa fa-list"></i>
-            <span class="menu-text">Products</span>
+            <span class="menu-text">Campaigns</span>
             <span class="badge badge-warning">New</span>
         </a> 
     </li> 

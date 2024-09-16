@@ -12,11 +12,10 @@
 
 <?php
 session_start();
-include('Authentication/Authentication.php');
+include('AdminClass/Authentication.php');
 $app = new Authentication; 
 if(isset($_POST['form'])){ 
-    $message  = $app->login($_POST);
- 
+    $message  = $app->login($_POST, $user_type = 1);
 }
    
 if(isset($_SESSION['id'])){
@@ -33,15 +32,14 @@ if(isset($_SESSION['id'])){
                 
                 <div id="login-column" class="col-md-6"> 
                     <?php
-                        
-                        if(isset($message['class'])){
-                            ?>
-                            <div class="alert alert-<?php echo $message['class'];?>" role="alert">
-                                <?php echo $message['message'];?>
-                            </div>
-                            <?php
-                        } 
-                        ?> 
+                    if(isset($message['class'])){
+                        ?>
+                        <div class="alert alert-<?php echo $message['class'];?>" role="alert">
+                            <?php echo $message['message'];?>
+                        </div>
+                        <?php
+                    } 
+                    ?> 
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="" method="post">
                             <h3 class="text-center text-info">Login</h3>
