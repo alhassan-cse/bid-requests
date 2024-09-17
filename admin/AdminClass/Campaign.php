@@ -7,11 +7,11 @@ Class Campaign{
 
     function __construct(){
 
-        define('DB_SERVER2', 'localhost');
-        define('DB_USERNAME2', 'root');
-        define('DB_PASSWORD2', '');
-        define('DB_DATABASE2', 'bid_request_db');
-        $this->conn = mysqli_connect(DB_SERVER2,DB_USERNAME2,DB_PASSWORD2,DB_DATABASE2);
+        $db_server = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_database = 'bid_request_db'; 
+        $this->conn = mysqli_connect($db_server, $db_username, $db_password, $db_database);
 
         // $con = mysqli_connect($host, $user, $password, $db_name);  
         if(mysqli_connect_errno()) {  
@@ -24,8 +24,7 @@ Class Campaign{
     }
 
     public function insert($data)
-    { 
-        //  print_r($data);die;
+    {  
         $campaign_name = $data['campaign_name'];
         $advertiser = $data['advertiser'];
         $company_url = $data['company_url'];
@@ -45,7 +44,12 @@ Class Campaign{
         $billing_id  = rand(100, 990);
         $appid = rand(100, 990);
         $creative_id = rand(100, 990); 
-        $expire_date = strtotime($data['expire_date']);
+
+        $expire_date = $data['expire_date'];
+        $date = str_replace('/', '-', $expire_date);
+        $str_date = date('Y-m-d', strtotime($date));
+        $expire_date = strtotime($str_date);
+        
         $sql = "INSERT  INTO `campaigns` 
         (`campaign_name`, `advertiser`, `code`, `appid`, `tld`, `billing_id`, `portal_name`, `dimension`, `creative_id`, `attribute`, `price`, `bidtype`, `image_url`, `from_hour`, `to_hour`, `hs_os`, `operator`, `device_make`, `country`, `expire_date`) VALUES ('$campaign_name', '$advertiser', $code, $appid, '$company_url','$billing_id', '$portal_name', '$dimension', '$creative_id', '$attribute','$price', '$bidtype', '$image_url', '$from_hour', '$to_hour', '$hs_os', '$operator', '$device_make','$country','$expire_date')";
     

@@ -7,11 +7,11 @@ Class Users{
 
     function __construct(){
 
-        define('DB_SERVER22', 'localhost');
-        define('DB_USERNAME22', 'root');
-        define('DB_PASSWORD22', '');
-        define('DB_DATABASE22', 'bid_request_db');
-        $this->conn = mysqli_connect(DB_SERVER22,DB_USERNAME22,DB_PASSWORD22,DB_DATABASE22);
+        $db_server = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_database = 'bid_request_db'; 
+        $this->conn = mysqli_connect($db_server, $db_username, $db_password, $db_database);
 
         // $con = mysqli_connect($host, $user, $password, $db_name);  
         if(mysqli_connect_errno()) {  

@@ -5,7 +5,8 @@ if(isset($_POST['form'])){
     $message  = $authentication->login($_POST, $user_type = 2);
 } 
 ?>
-<div class="card p-3">
+
+<div class="card p-3 pt-option">
     <div class="card-body">
         <?php
         if(isset($message['class'])){

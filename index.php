@@ -1,7 +1,9 @@
 <?php
 session_start();
+include('connect/Connect.php');
 include('admin/AdminClass/Authentication.php');
 include('app/App.php');
+ 
 $apps = new App;
 $data = $apps->display();
 // $expire_time = $apps->expire_time();
@@ -10,7 +12,7 @@ $statusArr = [0=>'Inactive', 1=>'Active'];
 $authentication = new Authentication;
 if(isset($_GET['status'])){ 
     $authentication->logout($user_type = 2);
-} 
+}
  
 // ua
 $d1 = $_SERVER['HTTP_USER_AGENT'];
@@ -20,7 +22,6 @@ $SERVER_NAME = $_SERVER['SERVER_NAME'];
 $ip_address = gethostbyname($SERVER_NAME);  
 
 if(isset($_POST['bid_form'])){ 
-   
    $message  = $apps->userBid($_POST);
 }
 
@@ -37,6 +38,15 @@ if(isset($_POST['bid_form'])){
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     </head>
+    <style>
+        .pt-option{
+            margin-bottom: 220px;
+        }
+        .pt-option-no-more{
+            margin-bottom: 400px;
+        }
+        
+    </style>
 <body>
 
     <div class="container"> 
@@ -53,7 +63,7 @@ if(isset($_POST['bid_form'])){
                     <?php 
                     if(isset($_SESSION['id'])){
                         ?>
-                            <a class="btn btn-outline-success my-2 my-sm-0 m-2" href="singup.php"><?php echo $_SESSION['name'];?></a>
+                            <a class="btn btn-outline-success my-2 my-sm-0 m-2" href="javascript:void(0)"><?php echo $_SESSION['name'];?></a>
                             <a class="btn btn-outline-success my-2 my-sm-0" href="?status=logout&logout=true">Logout</a>
                         <?php
                         
@@ -88,8 +98,11 @@ if(isset($_POST['bid_form'])){
     ?>
     </div>
 
-   
-    
-
+    <footer class="bg-dark pt-5 mb-5 mt-4">
+        <div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4">
+			<!-- copyright text -->
+			<div class="text-white"> Copyrights ©2024 BID Requests</div>
+        </div>
+    </footer>
 </body>
 </html>

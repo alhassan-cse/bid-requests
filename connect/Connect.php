@@ -1,5 +1,5 @@
 <?php
-class Config{
+class Connect{
 
     public $conn;
 

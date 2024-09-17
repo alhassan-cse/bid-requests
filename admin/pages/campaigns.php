@@ -21,7 +21,8 @@ $data = $app->index();
                         <th>Advertiser</th>
                         <th>Code</th> 
                         <th>Portal Name</th> 
-                        <th>Price</th> 
+                        <th>Price</th>  
+                        <th>Expire Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@ $data = $app->index();
                         <td><?php echo $row['code'] ;?></td> 
                         <td><?php echo $row['portal_name'] ;?></td> 
                         <td><?php echo $row['price'] ;?></td> 
+                        <td><?php echo date("d-m-Y", $row['expire_date']) ;?></td> 
                         <td>edit</td> 
                     </tr>
                     <?php

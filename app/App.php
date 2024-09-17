@@ -3,13 +3,12 @@ class App{
 
     public $conn;
 
-    function __construct(){
-
-        define('DB_SERVER22', 'localhost');
-        define('DB_USERNAME22', 'root');
-        define('DB_PASSWORD22', '');
-        define('DB_DATABASE22', 'bid_request_db');
-        $this->conn = mysqli_connect(DB_SERVER22,DB_USERNAME22,DB_PASSWORD22,DB_DATABASE22);
+    function __construct(){ 
+        $db_server = 'localhost';
+        $db_username = 'root';
+        $db_password = '';
+        $db_database = 'bid_request_db'; 
+        $this->conn = mysqli_connect($db_server, $db_username, $db_password, $db_database);
 
         // $con = mysqli_connect($host, $user, $password, $db_name);  
         if(mysqli_connect_errno()) {  
@@ -20,15 +19,12 @@ class App{
         } 
     }
 
-    public function display(){
-        $sql = "SELECT * FROM campaigns ORDER BY id DESC";
+    public function display(){ 
+        $date =  strtotime(date("Y-m-d"));
+       // $date =  strtotime(date("2024-09-16"));
+        $sql = "SELECT * FROM campaigns WHERE `expire_date` > $date ORDER BY id DESC";
         $result = mysqli_query($this->conn, $sql);
-        if($result){
-            return $result;
-        }
-        else{
-             
-        } 
+        return $result; 
     }
 
     public function singUp($data)
