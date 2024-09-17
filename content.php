@@ -13,7 +13,7 @@
                     <h4 class="card-title"><?php echo $row['campaign_name'];?></h4>
                     <ul class="price">
                         <li class="header">Advertiser : <?php echo $row['advertiser'];?></li>
-                        <li class="header">Company Name : <?php echo $row['tld'];?></li>
+                        <li class="header">Company: <?php echo $row['tld'];?></li>
                         <li class="header">Current Price : <?php echo $row['price'];?></li>
                         <li class="header">BID Type : <?php echo $row['bidtype'];?></li>
                         <li class="header">From Hour : <?php echo $row['from_hour'];?></li>
