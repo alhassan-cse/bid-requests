@@ -1,11 +1,5 @@
 <?php
-
-include('app/App.php');
-
-$app = new App;
-$app->display();
  
-
 $bid_request_start = '{
     "id": "myB92gUhMdC5DUxndq3yAg",
     "imp": [{
