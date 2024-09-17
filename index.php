@@ -3,7 +3,14 @@ session_start();
 include('connect/Connect.php');
 include('admin/AdminClass/Authentication.php');
 include('app/App.php');
- 
+
+
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'u212045625_bid_requests');
+define('DB_PASSWORD', 'X4z|8|Ln');
+define('DB_DATABASE', 'u212045625_bid_requests');
+
+
 $apps = new App;
 $data = $apps->display();
 // $expire_time = $apps->expire_time();
