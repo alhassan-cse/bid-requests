@@ -12,6 +12,8 @@
 
 <?php
 session_start();
+include('../connect/Connect.php');
+ 
 include('AdminClass/Authentication.php');
 $app = new Authentication; 
 if(isset($_POST['form'])){ 

@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-
+include('../connect/Connect.php');
 include('AdminClass/Authentication.php');
 
 $authentication = new Authentication;

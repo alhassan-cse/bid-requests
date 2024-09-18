@@ -1,6 +1,7 @@
 
 <?php
 // session_start();
+
 if(isset($_POST['form'])){
     $message  = $authentication->login($_POST, $user_type = 2);
 } 

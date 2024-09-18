@@ -1,24 +1,7 @@
 <?php
-class App{
 
-    public $conn;
-
-    function __construct(){ 
-        $db_server = 'localhost';
-        $db_username = 'root';
-        $db_password = '';
-        $db_database = 'bid_request_db'; 
-        $this->conn = mysqli_connect($db_server, $db_username, $db_password, $db_database);
-
-        // $con = mysqli_connect($host, $user, $password, $db_name);  
-        if(mysqli_connect_errno()) {  
-            die("Failed to connect with MySQL: ". mysqli_connect_error());  
-        }
-        else{
-            // print_r('connect');die;
-        } 
-    }
-
+class App extends Connect{
+    
     public function display(){ 
         $date =  strtotime(date("Y-m-d"));
        // $date =  strtotime(date("2024-09-16"));
@@ -99,12 +82,12 @@ class App{
 
     public function highestBid($id)
     {
-        $highest_bid_sql = "SELECT MAX(`price`) AS max FROM `bids` WHERE `campaign_id`='$id'";
+        $highest_bid_sql = "SELECT MAX(`price`) AS max_price FROM `bids` WHERE `campaign_id`='$id'";
         // print_r($highest_bid_sql);die;
         $highest_bid_result = mysqli_query($this->conn, $highest_bid_sql);
         if($highest_bid_result){
             $highest_bid_data = mysqli_fetch_assoc($highest_bid_result);
-            echo $highest_bid_data['max'];
+            echo $highest_bid_data['max_price'];
         }
         else{
             echo 'no-bid';
