@@ -10,8 +10,11 @@ if(isset($_POST['form'])){
        <?php
         if(isset($message['class'])){
             ?>
-            <div class="alert alert-<?php echo $message['class'];?>" role="alert">
-                <?php echo $message['message'];?>
+            <div class="alert alert-<?php echo $message['class'];?> alert-dismissible fade show" role="alert">
+                 </strong> <?php echo $message['message'];?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <?php
         } 

@@ -1,31 +1,16 @@
 <h2>Event Management</h2>
 <div class="row">
     <?php
-    $results_per_page = 5;
-                 
-    if (!isset ($_GET['page']) ) {  
-        $page = 1;  
-    } else {  
-        $page = $_GET['page'];  
-    }  
-
-    $sql = "SELECT * FROM campaigns";
- 
-    $apps = new App;
-    $data = $apps->display($results_per_page, $page, $sql);
-
-    $pagination = new Helper; 
-    
+    // print_r($data);die; 
     $count = mysqli_num_rows($data); 
- 
     if($count>0){
-        
+        while($row = mysqli_fetch_assoc($data)){
         ?>
 
         <div class="col-md-12 pt-2">
             <div class="d-flex flex-row-reverse bd-highlight mb-4">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info">Add new</button> 
+                    <button type="button" class="btn btn-secondary">Reference</button> 
                 </div>
             </div>
             <div class="card p-3">
@@ -45,9 +30,9 @@
                         ?>
                         <tr>
                             <th scope="row">1</th>
-                            <td><?php echo $row['campaign_name'];?></td>
-                            <td><?php echo $row['campaign_name'];?></td>
-                            <td><?php echo $row['expire_date'];?></td>
+                            <td>Mark</td>
+                            <td>Event Name</td>
+                            <td>12-1-2025</td>
                             <td>
                                 <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -78,26 +63,40 @@
                           
                     </tbody>
                 </table>
-                <?php 
-                echo $pagination->paginationDisplay($results_per_page, $page ,$sql); 
-                ?>
             </div>
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    
-                </ul>
-            </nav>
-
         </div>
 
-    
+        <!-- <div class="col-md-4 pt-2">
+            <div class="card p-3">
+                <img class="card-img-top" src="< ?php echo $row['image_url'];?>" alt="< ?php echo $row['campaign_name'];?>" style="width:100%">
+                <div class="card-body">
+                    <h4 class="card-title">< ?php echo $row['campaign_name'];?></h4>
+                    <ul class="price">
+                        <li class="header">Advertiser : < ?php echo $row['advertiser'];?></li>
+                        <li class="header">Company: < ?php echo $row['tld'];?></li>
+                        <li class="header">Current Price : < ?php echo $row['price'];?></li>
+                        <li class="header">BID Type : < ?php echo $row['bidtype'];?></li>
+                        <li class="header">From Hour : < ?php echo $row['from_hour'];?></li>
+                        <li class="header">To Hour : < ?php echo $row['to_hour'];?> </li>
+                        <li class="header">BID Expire :< ?php $apps->expireDate($row['expire_date']);?></li>
+                        <li class="header">Highest BID : < ?php $apps->highestBid($row['id'])?> </li>
+                    </ul>
+                    < ?php 
+                        if(isset($_SESSION['id'])){
+                        ?>
+                            <form action="" method="POST">
+                                <input type="hidden" name="campaign_id" value="< ?php echo $row['id'];?>">
+                                <input type="" name="value" value="">
+                                <button name="bid_form" class="btn btn-sm btn-primary">BID</button>
+                            </form>
+                        < ?php
+                        }
+                    ?>
+                </div>
+            </div>
+        </div> -->
         <?php
-        
+        }
     }
     else{
         ?> 

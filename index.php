@@ -4,9 +4,12 @@ session_start();
 include('connect/Connect.php');
 include('admin/AdminClass/Authentication.php');
 include('app/App.php');
+include('helper/Helper.php');
+//include('helper/Helper.php');
  
-$apps = new App;
-$data = $apps->display();
+// $apps = new App;
+// $data = $apps->display();
+ 
 // $expire_time = $apps->expire_time();
 $statusArr = [0=>'Inactive', 1=>'Active'];
 
@@ -25,49 +28,34 @@ $ip_address = gethostbyname($SERVER_NAME);
 if(isset($_POST['bid_form'])){ 
    $message  = $apps->userBid($_POST);
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Current Auctions - BID Request</title>
-        <meta charset="utf-8">
+        <title>Home | Event Management</title>
+        <meta charset="utf-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="assets/img/event-management.png" sizes="32x32" />
+        <link rel="icon" href="assets/img/event-management.png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="assets/img/event-management.png" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="assets/css/main.css">
     </head>
-    <style>
-        .pt-option{
-            margin-bottom: 220px;
-        }
-        .pt-option-no-more{
-            margin-bottom: 400px;
-        }
-        
-    </style>
 <body>
-
     <div class="container"> 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="index.php">Home</a>
+            <a href="index.php"><img class="header-logo" src="assets/img/event-management.png" alt="event-management"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button> 
             <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarSupportedContent">
-
-                
-                
                 <div class="d-flex flex-row-reverse">
                     <?php 
                     if(isset($_SESSION['id'])){
                         ?>
-                            <a class="btn btn-outline-success my-2 my-sm-0 m-2" href="javascript:void(0)"><?php echo $_SESSION['name'];?></a>
-                            <a class="btn btn-outline-success my-2 my-sm-0" href="?status=logout&logout=true">Logout</a>
+                        <a class="btn btn-outline-success my-2 my-sm-0 m-2" href="javascript:void(0)"><?php echo $_SESSION['name'];?></a>
+                        <a class="btn btn-outline-success my-2 my-sm-0" href="?status=logout&logout=true">Logout</a>
                         <?php
-                        
                     }
                     else{
                         ?>
@@ -76,8 +64,6 @@ if(isset($_POST['bid_form'])){
                         <?php
                     }
                     ?>
-                    
-                    
                 </div>
             </div>
         </nav>
@@ -99,10 +85,10 @@ if(isset($_POST['bid_form'])){
     ?>
     </div>
 
-    <footer class="bg-dark pt-5 mb-5 mt-4">
-        <div class="d-md-flex justify-content-between align-items-center text-center text-lg-start py-4">
+    <footer class="bg-dark mb-5" id="footer">
+        <div class="d-flex justify-content-center align-items-center text-center text-lg-start py-3">
 			<!-- copyright text -->
-			<div class="text-white"> Copyrights ©2024 BID Requests</div>
+			<div class="text-white">© <?php echo date("Y");?> Event Management. All rights reserved.</div>
         </div>
     </footer>
 </body>
